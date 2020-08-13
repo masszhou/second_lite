@@ -1,0 +1,8 @@
+build
+.idea
+*.pts
+*.obj
+*.user
+cmake-build-*
+.vscode
+__pycache__

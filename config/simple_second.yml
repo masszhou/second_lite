@@ -1,0 +1,33 @@
+VoxelNet:
+  vfe_module:
+    module_name: "SimpleVoxelRadius"
+    num_input_features: 4  # x,y,z,ref
+    num_filters: 3  # r_z_ref, pseudo parameters for SimpleVoxelRadius, since there is no conv in SimpleVoxelRadius, just equivalent to num_filters/out_channels from convolution op
+  middle_module:
+    module_name: "SpMiddleFHDLite"
+  rpn_module:
+    module_name: "RPNV2"
+    use_norm: True
+    num_class: 4
+    layer_nums: [5]
+    layer_strides: [1]
+    num_filters: [128]
+    upsample_strides: [1]
+    num_upsample_filters: [128]
+    use_groupnorm: False
+    num_groups: 32
+    num_input_features: 128
+    encode_background_as_zeros: True
+    use_direction_classifier: True
+    num_direction_bins: 2
+
+VoxelGenerator:
+  voxel_size: [0.05, 0.05, 0.1]  # xyz, indicate single voxel size in [m]
+  point_cloud_range: [0, -32.0, -3, 52.8, 32.0, 1]  # xmin, ymin, zmin, xmax, ymax, zmax in [m]
+  max_num_points: 5  # indicate maximum points contained in a voxel.
+  max_voxels: 20000  # indicate maximum voxels this function create.
+  full_mean: False  # if true, all empty points in voxel will be filled with mean of exist points.
+  block_filtering: False  # filter voxels by height. used for lidar point cloud.,
+  block_factor: 1  # no use if block_filtering=False
+  block_size: 8  # no use if block_filtering=False
+  height_threshold: 0.2  # no use if block_filtering=False

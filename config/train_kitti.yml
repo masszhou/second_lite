@@ -1,0 +1,28 @@
+dataset:
+  dataset_class_name: "KittiDataset"
+  kitti_info_path: "/media/zzhou/data/data-KITTI/object/kitti_infos_train.pkl"
+  kitti_root_path: "/media/zzhou/data/data-KITTI/object"
+
+database_sampler:
+  database_info_path: "/media/zzhou/data/data-KITTI/object/kitti_dbinfos_train.pkl"
+  global_random_rotation_range_per_object: [0, 0]
+  rate: 1.0
+  sample_groups:
+    - key: "Car"
+      value: 15
+  database_prep_steps:
+    - filter_by_min_num_points:
+        min_num_point_pairs:
+          key: "Car"
+          value: 5  # if less than 5 points for a car label, then discard this sample
+    - filter_by_difficulty:
+        removed_difficulties: [-1]
+
+train:
+  batch_size: 12
+
+optimizer:
+  name: "adam"
+  learning_rate: 0.001
+  fixed_weight_decay: true
+  use_moving_average: false

@@ -1,0 +1,57 @@
+car:
+  class_name: "Car"
+  anchor_range: [0, -32.0, -1.0, 52.8, 32.0, -1.0]  # [minx, miny, minz, maxx, maxy, max z] in meters
+  sizes: [1.6, 3.9, 1.56]  # [w, l, h] in meters
+  rotations: [0, 1.57]  # in radius, anchors for rotation
+  match_threshold: 0.6
+  unmatch_threshold: 0.45
+  similarity: "NearestIouSimilarity"
+  nms:
+    nms_pre_max_size: 1000
+    nms_post_max_size: 100
+    nms_score_threshold: 0.45
+    nms_iou_threshold: 0.01
+
+van:
+  class_name: "Van"
+  anchor_range: [0, -32.0, -1.0, 52.8, 32.0, -1.41]  # carefully set z center for different class
+  sizes: [1.87103749, 5.02808195, 2.20964255]  # wlh, prior knowledge from different class
+  rotations: [0, 1.57]
+  match_threshold: 0.6
+  unmatch_threshold: 0.45
+  similarity: "NearestIouSimilarity"
+  nms:
+    nms_pre_max_size: 1000
+    nms_post_max_size: 100
+    nms_score_threshold: 0.45
+    nms_iou_threshold: 0.01
+
+pedestrian:
+  class_name: "Pedestrian"
+  anchor_range: [0, -32.0, -1.0, 52.8, 32.0, -0.6]  # carefully set z center for different class
+  sizes: [0.6, 0.8, 1.73]  # wlh, prior knowledge from different class
+  rotations: [0, 1.57]
+  match_threshold: 0.35  # for difficult object
+  unmatch_threshold: 0.2  # for difficult object
+  similarity: "NearestIouSimilarity"
+  nms:
+    nms_pre_max_size: 1000
+    nms_post_max_size: 100
+    nms_score_threshold: 0.45
+    nms_iou_threshold: 0.01
+
+cyclist:
+  class_name: "Cyclist"
+  anchor_range: [0, -32.0, -1.0, 52.8, 32.0, -0.6]  # carefully set z center for different class
+  sizes: [0.6, 1.76, 1.73]  # wlh, prior knowledge from different class
+  rotations: [0, 1.57]
+  match_threshold: 0.35  # for difficult object
+  unmatch_threshold: 0.2  # for difficult object
+  similarity: "NearestIouSimilarity"
+  nms:
+    nms_pre_max_size: 1000
+    nms_post_max_size: 100
+    nms_score_threshold: 0.45
+    nms_iou_threshold: 0.01
+
+
