@@ -57,6 +57,7 @@ class SecondDetector:
         self.anchors = torch.tensor(self.anchors, dtype=torch.float32, device=self.device)
         self.anchors = self.anchors.view(1, -1, 7)
 
+
     def load_sample_from_points(self, points) -> SampleType:
         res = self.voxel_generator.generate(points[:, :4], max_voxels=90000)
         voxels, coords, num_points = res['voxels'], res['coordinates'], res['num_points_per_voxel']
@@ -85,14 +86,21 @@ class SecondDetector:
         return pred
 
     @staticmethod
-    def visualize_bev(points: np.ndarray, boxes_lidar) -> np.ndarray:
+    def visualize_bev(points: np.ndarray, boxes_lidar: np.ndarray, labels: np.ndarray) -> np.ndarray:
         """
         @param: points: e.g. ndarray with shape (108348, 4)
         @param: boxes_lidar: center box format
         Returns: cv image
         """
+        color_palette = [(0, 255, 0),    # car
+                         (255, 0, 0),  # van
+                         (0, 0, 255),    # pedestrian
+                         (0, 255, 255)]  # cyclist
+        kitti_cls = ["car", "van", "pedestrian", "cyclist"]
         bev_map = SecondDetector.build_bev(points)
-        bev_map = SecondDetector.draw_box_in_bev(bev_map, boxes_lidar)
+        cls_color = [color_palette[cls_label] for cls_label in labels]
+        label_text = [kitti_cls[cls_label] for cls_label in labels]
+        bev_map = SecondDetector.draw_box_in_bev(bev_map, boxes_lidar, color=cls_color)
         return bev_map
 
     @staticmethod
@@ -110,10 +118,8 @@ class SecondDetector:
         return bev_map
 
     @staticmethod
-    def draw_box_in_bev(bev, boxes, vis_point_range=None, color=None):
+    def draw_box_in_bev(bev, boxes, color: List[Tuple], vis_point_range=None, labels: Optional[List[str]] = None):
         if vis_point_range is None:
             vis_point_range = [-50, -30, -3, 50, 30, 1]  # [xmin, ymin, zmin, xmax, ymax, zmax]
-        if color is None:
-            color = [0, 255, 0]
         bev_map = visualization.draw_box_in_bev(bev, vis_point_range, boxes, color, 2)
         return bev_map

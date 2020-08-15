@@ -19,6 +19,7 @@ class Predict:
 
     def predict_pcl_files(self,
                           pcl_path: str = None,
+                          img_root_path: str = None,
                           net_config_path: str = None,
                           class_config_path: str = None,
                           ckpt_path: str = None,
@@ -49,8 +50,6 @@ class Predict:
         else:
             filenames = [pcl_path, ]
         filenames.sort()
-        for each in filenames:
-            print(each)
 
         detector = SecondDetector(net_config_path, class_config_path, ckpt_path, detect_range=(-50, -50, 50, 50))
         # detector = SecondDetector(net_config_path, ckpt_path)
@@ -74,12 +73,13 @@ class Predict:
             print(">> boxes_lidar: ")
             for each in boxes_lidar:
                 print(each)  # (x, y, z, w, l, h, yaw) in velodyne coordinates
-            bev = detector.visualize_bev(points, boxes_lidar)
+            bev = detector.visualize_bev(points, boxes_lidar, labels=labels)
 
             file_token = filename[-10:-4]
             root_path = filename[:-19]
-            image_filepath = root_path + "image_2/" + file_token + ".png"
-            img = cv2.imread(image_filepath)
+            if img_root_path is None:
+                img_root_path = root_path + "image_2/"
+            img = cv2.imread(img_root_path + file_token + ".png")
 
             if show_gt:
                 label_filepath = root_path + "label_2/" + file_token + ".txt"

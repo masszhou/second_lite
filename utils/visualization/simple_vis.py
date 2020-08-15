@@ -165,7 +165,8 @@ def draw_box_in_bev(img,
 
     bev_lines = np.concatenate([bev_corners[:, [0, 2, 3]], bev_corners[:, [1, 3, 0]]], axis=2)
     bev_lines = bev_lines.reshape(-1, 4)
-    colors = np.tile(np.array(color).reshape(1, 3), [bev_lines.shape[0], 1])
+    # colors = np.tile(np.array(color).reshape(1, 3), [bev_lines.shape[0], 1])
+    colors = np.array([x * 3 for x in color]).reshape([-1, 3])  # each obj has 3 line segments
     colors = colors.astype(np.int32)
     img = cv2_draw_lines(img, bev_lines, colors, thickness)
     if boxes.shape[1] == 9:
