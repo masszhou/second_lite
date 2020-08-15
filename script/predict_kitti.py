@@ -4,6 +4,7 @@ from time import time
 import numpy as np
 import fire
 from pathlib import Path
+from typing import Optional
 
 from instance.detector import SecondDetector
 from dataset.kitti import read_kitti_label
@@ -25,7 +26,8 @@ class Predict:
                           net_config_path: str = None,
                           class_config_path: str = None,
                           ckpt_path: str = None,
-                          save: bool = False):
+                          save: bool = False,
+                          viewer_port: Optional[int] = None):
         """predict a single point cloud data from numpy array format
         expected shape=[n_points, xyzr=4]
 
@@ -35,6 +37,8 @@ class Predict:
         :param class_config_path: dataset class configure
         :param ckpt_path: .tckpt file, trained weights
         :param show_gt: if display GT label
+        :param save: save to video
+        :param viewer_port:
         """
 
         if pcl_path is None:
@@ -67,6 +71,12 @@ class Predict:
             out_stream = None
         vis_img = np.zeros((900, 1000, 3), dtype=np.uint8)
 
+        if viewer_port is not None:
+            from utils.visualization import LidarViewer
+            lidar_viewer = LidarViewer(viewer_port)
+        else:
+            lidar_viewer = None
+
         detector = SecondDetector(net_config_path, class_config_path, ckpt_path, detect_range=(-50, -50, 50, 50))
 
         for file_path in filenames:
@@ -78,6 +88,9 @@ class Predict:
             boxes_lidar = res[0]["box3d_lidar"].detach().cpu().numpy()
             scores = res[0]["scores"].detach().cpu().numpy()
             labels = res[0]["label_preds"].detach().cpu().numpy()
+
+            if lidar_viewer is not None:
+                lidar_viewer.load_points(points[:, :3], points[:, 3])
             # print("--------")
             # print(f">> filename: {file_path}")
             # print(f">> scores:   {scores}")
