@@ -2,7 +2,7 @@
 simplified SECOND LiDAR object detection
 
 my change:
-* use own customized spconv_lite instead of spconv
+* use own customized [spconv_lite](https://github.com/masszhou/spconv_lite) instead of [spconv](https://github.com/traveller59/spconv)
 * rewrite/refactor code
 * trained with kitti
 * trained with lyft 3d detection (not included in this repo)
