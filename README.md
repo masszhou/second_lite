@@ -6,10 +6,22 @@ my change:
 * rewrite/refactor code
 * trained with kitti
 * trained with lyft 3d detection (not included in this repo)
+* add my own understanding and illustrations about the model 
 
-# 2. Model Architecture
+# 2. SECOND lite Model Architecture
+<img src="./doc/imgs/second.png"  width="1200" />
+
 ### 2.1 VFE module
+<img src="./doc/imgs/voxel_data.png"  width="400" />
+<img src="./doc/imgs/voxel_coord.png"  width="400" />
+
+
+<img src="./doc/imgs/vfe_output.png"  width="400" />
+
+
 ### 2.2 middle conv3D module
+<img src="./doc/imgs/middle_output.png"  width="400" />
+
 ### 2.3 RPN module
 
 # 3. How to use
