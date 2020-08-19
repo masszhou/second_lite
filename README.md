@@ -6,11 +6,16 @@ my change:
 * rewrite/refactor code
 * trained with kitti
 * trained with lyft 3d detection (not included in this repo)
-* add my own understanding and illustrations about the model 
+* add my own understanding and illustrations about the model
+* test on a real testing car, 0.05 sec per Lidar frame, wth GTX 2080 (not included in this repo)
 
 My results
 * KITTI [2011-09-26-0005](https://youtu.be/p5ZlXYoMb5o)
 * KITTI [2011 09 26 0023](https://youtu.be/fRAjDE7FdDQ)
+* test on a real testing car
+  * 3d visualization is my opengl 2.0 practice [repo](https://github.com/masszhou/lidarviewer)
+  * results currently rendered in BEV, yellow is cyclist, defined in KITTI
+<img src="./doc/imgs/test.png"  width="500" />
 
 # 2. SECOND lite Model Architecture
 <img src="./doc/imgs/second.png"  width="1200" />
