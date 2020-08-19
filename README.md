@@ -8,6 +8,10 @@ my change:
 * trained with lyft 3d detection (not included in this repo)
 * add my own understanding and illustrations about the model 
 
+My results
+* KITTI [2011-09-26-0005](https://youtu.be/p5ZlXYoMb5o)
+* KITTI [2011 09 26 0023](https://youtu.be/fRAjDE7FdDQ)
+
 # 2. SECOND lite Model Architecture
 <img src="./doc/imgs/second.png"  width="1200" />
 
