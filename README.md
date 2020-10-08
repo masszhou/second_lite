@@ -1,5 +1,5 @@
 # 1. Introduction
-a light wight version of [SECOND](https://github.com/traveller59/second.pytorch) LiDAR object detection
+a lightweight version of [SECOND](https://github.com/traveller59/second.pytorch) LiDAR object detection
 
 my change:
 * use own customized [spconv_lite](https://github.com/masszhou/spconv_lite) instead of [spconv](https://github.com/traveller59/spconv)
