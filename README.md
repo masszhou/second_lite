@@ -1,9 +1,10 @@
 # 1. Introduction
-simplified [SECOND](https://github.com/traveller59/second.pytorch) LiDAR object detection
+a light wight version of [SECOND](https://github.com/traveller59/second.pytorch) LiDAR object detection
 
 my change:
 * use own customized [spconv_lite](https://github.com/masszhou/spconv_lite) instead of [spconv](https://github.com/traveller59/spconv)
 * rewrite/refactor code
+* use a simplfied voxel extractor, but works well.
 * trained with kitti
 * trained with lyft 3d detection
 * add my own understanding and illustrations about the model
