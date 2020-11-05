@@ -18,6 +18,8 @@ My results
   * results currently rendered in BEV, yellow is cyclist, defined in KITTI
 <img src="./doc/imgs/test.png"  width="500" />
 
+this is a showcase repo, KITTI training sketch code can be found in https://github.com/masszhou/SECOND_lite_dev
+
 # 2. SECOND lite Model Architecture
 <img src="./doc/imgs/second.png"  width="1200" />
 
